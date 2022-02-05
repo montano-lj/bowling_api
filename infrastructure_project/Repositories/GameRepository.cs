@@ -1,5 +1,6 @@
 ﻿using domain_project.domain.AggregateModels.Game;
 using domain_project.domain.SeedWork;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,27 +21,29 @@ namespace infrastructure_project.Repositories
 
         public Task<Game> CreateAsync(Game entity)
         {
-            throw new NotImplementedException();
+            _context.Games.Add(entity);
+
+            return Task.FromResult(entity);
         }
 
-        public Task DeleteAsync(int id)
+        public async Task DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            var GameToDelete = await _context.Games.FindAsync(id);
+            _context.Games.Remove(GameToDelete);
         }
 
-        public IQueryable<Game> GetAsQueryable()
-        {
-            throw new NotImplementedException();
-        }
+        public IQueryable<Game> GetAsQueryable() => _context.Games.Include(g => g.Frames).AsNoTracking();
 
-        public Task<Game> GetByIdAsync(int id)
+
+        public async Task<Game> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _context.Games.Include(g => g.Frames).FirstOrDefaultAsync(g => g.Id == id);
         }
 
         public Task<Game> UpdateAsync(Game entity)
         {
-            throw new NotImplementedException();
+            _context.Games.Update(entity);
+            return Task.FromResult(entity);
         }
     }
 }

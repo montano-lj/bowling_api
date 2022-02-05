@@ -6,3 +6,8 @@
 /domain_project/obj
 /infrastructure_project/obj
 /service_project/obj
+/Bowling_Api/obj
+/domain_project/bin/Debug/net5.0
+/infrastructure_project/bin/Debug/net5.0
+/TestProject1/bin
+/TestProject1/obj

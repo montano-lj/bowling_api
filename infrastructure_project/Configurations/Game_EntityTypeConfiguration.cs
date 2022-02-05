@@ -10,7 +10,6 @@ namespace infrastructure_project.Configurations
         {
             builder.HasKey(x => x.Id);
 
-
             //read up on fluent api C# .net Core
 
 
